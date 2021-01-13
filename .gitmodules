@@ -1,0 +1,9 @@
+[submodule "thirdparty/coco"]
+	path = thirdparty/coco
+	url = git@github.com:hydah/coco.git
+[submodule "thirdparty/webrtc-core"]
+	path = thirdparty/webrtc-core
+	url = git@git.code.oa.com:TWebRTC/webrtc-core.git
+[submodule "thirdparty/json"]
+	path = thirdparty/json
+	url = git@github.com:nlohmann/json.git
