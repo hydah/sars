@@ -29,7 +29,7 @@ class MyPacket : public webrtccore::Packet {
     };
 };
 
-class MediaFrame: public webrtccore::MeidaData {
+class MediaFrame: public webrtccore::MediaData {
  public:
     MediaFrame(webrtccore::MediaType media_type, char *data, int32_t len,
                uint64_t timestamp, uint32_t ssrc,
@@ -79,12 +79,13 @@ public:
     virtual void OnAddLocalVideoTrack(uint32_t ssrc, const std::string &label,
                               const std::map<uint32_t, webrtccore::VideoCodeInfo> &codec_info_map);
     virtual void OnRemoveVideoTrack(uint32_t ssrc);
-    virtual void OnRecvMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data);
+    virtual void OnRecvMediaData(std::unique_ptr<webrtccore::MediaData> media_data);
     virtual void OnRecvChannelData(std::unique_ptr<webrtccore::Packet> data);
     virtual void OnSendDataToRemote(std::unique_ptr<webrtccore::Packet> data,
                             const webrtccore::NetAddr &addr);
     virtual void OnRequestIFrame(uint32_t ssrc);
     virtual void OnSendDumpData(char *dump_data, int32_t len);
+    virtual void OnDeliverRtpPacket(webrtccore::MediaType type, std::shared_ptr<webrtccore::RtpPacket> packet);
 
  private:
     virtual void DoDecode(char *data, int32_t len);

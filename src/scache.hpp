@@ -23,7 +23,7 @@ public:
     // std::vector<std::shared_ptr<RtcForwarder>> forwarders;
     
 public:
-    int CacheMedia(std::unique_ptr<webrtccore::MeidaData> mediaData);
+    int CacheMedia(std::unique_ptr<webrtccore::MediaData> mediaData);
     void SetPublisher(std::shared_ptr<RtcPublisher> publisher);
     void AddPlayer(std::shared_ptr<RtcPlayer> player);
 };

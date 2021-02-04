@@ -11,7 +11,7 @@ RtcPublisher::~RtcPublisher()
 
 }
 
-void RtcPublisher::OnRecvMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data)
+void RtcPublisher::OnRecvMediaData(std::unique_ptr<webrtccore::MediaData> media_data)
 {
     // coco_dbg("get data, len is %d", media_data->len_);
     _scache->CacheMedia(std::move(media_data));

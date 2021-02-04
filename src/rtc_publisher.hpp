@@ -12,7 +12,7 @@ public:
     virtual ~RtcPublisher();
 
 public:
-    virtual void OnRecvMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data);
+    virtual void OnRecvMediaData(std::unique_ptr<webrtccore::MediaData> media_data);
     void SetStreamCache(std::shared_ptr<StreamCache_> scache) { _scache = scache; };
 public:
     std::shared_ptr<StreamCache_> _scache;

@@ -233,12 +233,12 @@ void RtcPeer::OnConnectionChange(webrtccore::PeerConnectionState new_state) {
 void RtcPeer::OnAddLocalVideoTrack(uint32_t ssrc, const std::string &label,
                           const std::map<uint32_t, webrtccore::VideoCodeInfo> &codec_info_map) {
 
-    printf("local worker_id[%d] add Video Track ssrc:%u\r\n", worker_id_, ssrc);
+    coco_info("local worker_id[%d] add Video Track ssrc:%u\r\n", worker_id_, ssrc);
     auto itor = codec_info_map.begin();
 
     while (itor != codec_info_map.end()) {
         const webrtccore::VideoCodeInfo *video_codec_info = &(itor->second);
-        printf("local worker_id[%d] payload_type:%d codec_type:%u profile_level_id:%s\r\n",
+        coco_info("local worker_id[%d] payload_type:%d codec_type:%u profile_level_id:%s\r\n",
                worker_id_,
                video_codec_info->payload_type,
                video_codec_info->codec_type,
@@ -262,14 +262,15 @@ void RtcPeer::OnAddLocalVideoTrack(uint32_t ssrc, const std::string &label,
 void RtcPeer::OnAddLocalAudioTrack(uint32_t ssrc, const std::string &label,
                           const std::map<uint32_t, webrtccore::AudioCodeInfo> &codec_info_map) {
 
-    printf("worker_id[%d] add Audio Track ssrc:%u label:%s\r\n", worker_id_, ssrc, label.c_str());
+    coco_info("worker_id[%d] add Audio Track ssrc:%u label:%s\r\n", worker_id_, ssrc, label.c_str());
 
     auto itor = codec_info_map.begin();
 
     while (itor != codec_info_map.end()) {
         const webrtccore::AudioCodeInfo *audio_codec_info = &(itor->second);
-        printf("local worker_id[%d] payload_type:%d codec_type:%u sample_rate:%d channels:%d\r\n",
+        coco_info("local worker_id[%d], key %u,  payload_type:%d codec_type:%u sample_rate:%d channels:%d\r\n",
                worker_id_,
+               itor->first,
                audio_codec_info->payload_type,
                audio_codec_info->codec_type,
                audio_codec_info->sample_rate,
@@ -292,14 +293,15 @@ void RtcPeer::OnAddLocalAudioTrack(uint32_t ssrc, const std::string &label,
 
 void RtcPeer::OnAddAudioTrack(uint32_t ssrc, const std::string &label,
                                          const std::map<uint32_t,webrtccore::AudioCodeInfo> &codec_info_map) {
-    printf("local worker_id[%d] add Audio Track ssrc:%u label:%s\r\n",
+    coco_info("local worker_id[%d] add Audio Track ssrc:%u label:%s\r\n",
            worker_id_, ssrc, label.c_str());
     auto itor = codec_info_map.begin();
 
     while (itor != codec_info_map.end()) {
         const webrtccore::AudioCodeInfo *audio_codec_info = &(itor->second);
-        printf("remote worker_id[%d] payload_type:%d codec_type:%u sample_rate:%d channels:%d\r\n",
+        coco_info("remote worker_id[%d], key %u, payload_type:%d codec_type:%u sample_rate:%d channels:%d\r\n",
                worker_id_,
+               itor->first,
                audio_codec_info->payload_type,
                audio_codec_info->codec_type,
                audio_codec_info->sample_rate,
@@ -316,12 +318,13 @@ void RtcPeer::OnAddAudioTrack(uint32_t ssrc, const std::string &label,
 /*recv do*/
 void RtcPeer::OnAddVideoTrack(uint32_t ssrc, const std::string &label,
                                          const std::map<uint32_t, webrtccore::VideoCodeInfo> &codec_info_map) {
-    printf("DownLoad worker_id[%d] add Video Track ssrc:%u\r\n", worker_id_, ssrc);
+    coco_info("DownLoad worker_id[%d] add Video Track ssrc:%u", worker_id_, ssrc);
     auto itor = codec_info_map.begin();
 
     while (itor != codec_info_map.end()) {
         const webrtccore::VideoCodeInfo *video_codec_info = &(itor->second);
-        printf("remote worker_id[%d] payload_type:%d codec_type:%u profile_level_id:%s\r\n", worker_id_,
+        coco_info("remote worker_id[%d] key %u, payload_type:%d codec_type:%u profile_level_id:%s\r\n", worker_id_,
+               itor->first,
                video_codec_info->payload_type,
                video_codec_info->codec_type,
                video_codec_info->profile_level_id.c_str());
@@ -335,7 +338,7 @@ void RtcPeer::OnAddVideoTrack(uint32_t ssrc, const std::string &label,
 
 
 /*recv do by ssrc*/
-void RtcPeer::OnRecvMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data) {
+void RtcPeer::OnRecvMediaData(std::unique_ptr<webrtccore::MediaData> media_data) {
     //test file
     if (webrtccore::kMediaVideo == media_data->media_type_) {
         // auto itor = video_codec_info_map_.find(media_data->payload_type_);
@@ -370,6 +373,11 @@ void RtcPeer::OnRecvMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data)
         //        itor->second.channels);
         // }
     }
+}
+
+void RtcPeer::OnDeliverRtpPacket(webrtccore::MediaType type, std::shared_ptr<webrtccore::RtpPacket> packet)
+{
+
 }
 
 

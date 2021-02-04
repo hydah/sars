@@ -12,7 +12,7 @@ public:
     virtual ~RtcPlayer();
 
 public:
-    virtual void FeedMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data);
+    virtual void FeedMediaData(std::unique_ptr<webrtccore::MediaData> media_data);
     void SetStreamCache(std::shared_ptr<StreamCache_> scache) { _scache = scache; };
     virtual void OnConnectionChange(webrtccore::PeerConnectionState new_state);
     virtual void OnRequestIFrame(uint32_t ssrc);

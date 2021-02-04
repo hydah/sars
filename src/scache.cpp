@@ -22,7 +22,7 @@ void StreamCache_::AddPlayer(std::shared_ptr<RtcPlayer> player)
     players.push_back(player);
 }
 
-int StreamCache_::CacheMedia(std::unique_ptr<webrtccore::MeidaData> mediaData)
+int StreamCache_::CacheMedia(std::unique_ptr<webrtccore::MediaData> mediaData)
 {
     uint32_t   ssrc         = 0;
     uint32_t   payload_type = 0;
@@ -47,7 +47,7 @@ int StreamCache_::CacheMedia(std::unique_ptr<webrtccore::MeidaData> mediaData)
                                                             payload_type,
                                                             mediaData->rotate_angle_,
                                                             mediaData->audio_frame_len_));
-        it->FeedMeidaData(std::move(raw_data));
+        it->FeedMediaData(std::move(raw_data));
     }
     return 0;
 }

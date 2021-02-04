@@ -11,7 +11,7 @@ RtcPlayer::~RtcPlayer()
 
 }
 
-void RtcPlayer::FeedMeidaData(std::unique_ptr<webrtccore::MeidaData> media_data)
+void RtcPlayer::FeedMediaData(std::unique_ptr<webrtccore::MediaData> media_data)
 {
     peer_connection_->FeedMediaData(std::move(media_data));
     return;
