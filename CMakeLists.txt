@@ -5,7 +5,7 @@ project(sars C CXX)
 set(CMAKE_CXX_STANDARD 11)
 
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
+  set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
 
@@ -42,8 +42,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif()
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
-set(CMAKE_CXX_FLAGS_DEBUG "-O0")
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O0 -DNDEBUG")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
@@ -70,9 +70,10 @@ include_directories(${THIRDPARTY}/webrtc-core/lib/usrsctp/include)
 
 # coco lib
 add_subdirectory(${THIRDPARTY}/coco)
-include_directories(${THIRDPARTY}/coco)
 include_directories(${THIRDPARTY}/coco/src)
-# link_directories(${THIRDPARTY}/coco)
+include_directories(${THIRDPARTY}/coco/lib)
+include_directories(${THIRDPARTY}/coco/lib/st/include)
+
 
 # json
 add_subdirectory(${THIRDPARTY}/json)

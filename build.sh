@@ -13,4 +13,4 @@ mkdir -p build
 
 cd build
 cmake3 ..
-make
+make VERBOSE=1
