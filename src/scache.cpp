@@ -1,5 +1,5 @@
 #include "scache.hpp"
-#include "coco/base/log.hpp"
+#include "log/log.hpp"
 
 StreamCache_::StreamCache_()
 {

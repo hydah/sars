@@ -1,8 +1,6 @@
-#include "coco/net/net.hpp"
-#include "coco/net/http_stack.hpp"
-#include "coco/base/log.hpp"
-#include "coco/base/st_socket.hpp"
-#include "coco/base/error.hpp"
+#include "common/error.hpp"
+#include "log/log.hpp"
+#include "net/layer7/coco_http.hpp"
 #include "rtc_server.hpp"
 
 #include <string>

@@ -54,9 +54,7 @@ message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_T
 
 set(THIRDPARTY "${PROJECT_SOURCE_DIR}/thirdparty")
 
-# coco lib
-add_subdirectory(${THIRDPARTY}/coco)
-# link_directories(${THIRDPARTY}/coco)
+
 
 
 # webrtc-core lib
@@ -66,13 +64,20 @@ link_directories(${THIRDPARTY}/webrtc-core/lib/openssl/lib)
 include_directories(${THIRDPARTY}/webrtc-core/lib/srtp/include)
 link_directories(${THIRDPARTY}/webrtc-core/lib/srtp/lib)
 include_directories(${THIRDPARTY}/webrtc-core/common)
+link_directories(${THIRDPARTY}/webrtc-core/lib/usrsctp/lib)
+include_directories(${THIRDPARTY}/webrtc-core/lib/usrsctp/include)
+
+
+# coco lib
+add_subdirectory(${THIRDPARTY}/coco)
+include_directories(${THIRDPARTY}/coco)
+include_directories(${THIRDPARTY}/coco/src)
+# link_directories(${THIRDPARTY}/coco)
 
 # json
 add_subdirectory(${THIRDPARTY}/json)
 
-
 include_directories(${THIRDPARTY}/json/single_include)
-include_directories(${THIRDPARTY}/coco)
 include_directories(${THIRDPARTY}/webrtc-core)
 
 # sars binary
@@ -92,5 +97,4 @@ set(SRCS
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 add_executable(sars ${SRCS})
-target_link_libraries(sars coco webrtc-core ssl crypto srtp2 pthread dl)
-# target_link_libraries(sars coco)
+target_link_libraries(sars coco webrtc-core ssl crypto srtp2 usrsctp pthread dl)

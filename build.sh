@@ -1,3 +1,5 @@
+
+rm build -rf
 mkdir -p build
 
 # git submodule init
@@ -8,6 +10,7 @@ mkdir -p build
 # git submodule update
 
 # cd ../..
+
 cd build
 cmake3 ..
 make

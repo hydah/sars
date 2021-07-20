@@ -5,11 +5,10 @@
 #ifndef _RTC_SERVER_H_
 #define _RTC_SERVER_H_
 
-#include "coco/net/http_stack.hpp"
-#include "coco/base/log.hpp"
-#include "coco/base/st_socket.hpp"
-#include "coco/base/error.hpp"
-#include "coco/net/net.hpp"
+#include "common/error.hpp"
+#include "log/log.hpp"
+#include "net/layer7/coco_http.hpp"
+#include "net/layer4/coco_udp.hpp"
 #include "rtc_peer.hpp"
 #include "scache.hpp"
 
@@ -29,7 +28,7 @@ public:
     RTCServer(std::string lip, uint32_t lport, std::string lOuterAddr);
     virtual ~RTCServer();
 public:
-    virtual int32_t cycle();
+    virtual int32_t Cycle();
     int32_t run();
     void OnRecvClientPkt(char* buf, int len, struct sockaddr_in* addr);
     int32_t SendPktToClient(char* buf, int len, struct sockaddr_in* addr);
